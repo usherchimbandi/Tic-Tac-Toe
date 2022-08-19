@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="tictactoe.css">
+    <script src="tictactoe.js" defer></script>
+    <script src="https://kit.fontawesome.com/f6252331b6.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Square+Peg&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="outer-container">
+        <h1>Tic Tac Toe</h1>
+        <div class="container">
+            <div class="settings">
+                <div class="both player1">
+                    <i class="fa-solid fa-x setting-icon"></i>
+                    <!-- <h1 style="font-size: 50px">x</h1> -->
+                    <label for="player1-name">Enter Name:</label>
+                    <input type="text" id="player1-name" placeholder="Jack" value="Player1">
+                </div>
+                <div class="both player2">
+                    <i class="fa-solid fa-o setting-icon"></i>
+                    <!-- <h1 style="font-size: 50px">o</h1> -->
+                    <label for="player2-name">Enter Name:</label>
+                    <input type="text" id="player2-name" placeholder="John" value="Player2">
+                </div>
+                <button class="submit-details btn">Submit</button>
+                <button class="restart btn">Restart</button>
+            </div>
+            <div class="right">
+                <h2></h2>
+                <div class="gameboard">
+                    <div class="block one a" value="1" data-status="active"></div>
+                    <div class="block two a" value="2" data-status="active"></div>
+                    <div class="block three a" value="3" data-status="active"></div>
+                    <div class="block four" value="4" data-status="active"></div>
+                    <div class="block five" value="5" data-status="active"></div>
+                    <div class="block six" value="6" data-status="active"></div>
+                    <div class="block seven last-blocks" value="7" data-status="active"></div>
+                    <div class="block eight last-blocks" value="8" data-status="active"></div>
+                    <div class="block nine last-blocks" value="9" data-status="active"></div>
+                 </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="overlay">
+        <div class="text"></div>
+        <button class="bbtn">Play Again?</button>
+    </div>
+
+    <div class="overlay">
+        <div class="text"></div>
+        <button class="tie-btn">Play Again?</button>
+    </div>
+</body>
+</html>

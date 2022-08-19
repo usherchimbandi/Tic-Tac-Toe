@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    /* color: white; */
+}
+
+body {
+    background-color: black;
+
+}
+
+h1 {
+    color: white;
+}
+
+.outer-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    outline: 2px solid white;
+    width: 850px;
+    height: 470px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    border-radius: 35px;
+}
+
+.settings {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    row-gap: 25px;
+    /* padding: 10px; */
+}
+
+.both {
+    outline: 2px solid white;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 14px;
+    border-radius: 35px;
+}
+
+.setting-icon {
+    margin-bottom: 30px;
+    font-size: 50px;
+    color: white;
+}
+
+label {
+    font-size: larger;
+    color: white;
+}
+
+input {
+    margin-top: 5px;
+    padding: 8px;
+    border-radius: 18px;
+    border: 1px solid white;
+    outline: none;
+}
+
+
+.btn {
+    padding: 7px 0px 7px 0;
+    width: 74%;
+    border-radius: 20px;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.submit-details:hover {
+    transform: scale(1.05);
+}
+
+.restart {
+    display: none;
+}
+
+.right {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    row-gap: 50px;
+
+}
+
+h2 {
+    color: white;
+
+}
+
+
+
+.gameboard {
+    /* outline: 1px dotted white; */
+    width: 350px;
+    height: 350px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 75px;
+    border: 1px solid white;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.a {
+    border: 1px solid white;
+    border-top: none;
+}
+
+.one,
+.four,
+.seven {
+    border-left: none;
+}
+
+.three,
+.six,
+.nine {
+    border-right: none;
+}
+
+
+.last-blocks {
+    border-bottom: none;
+}
+
+
+.q {
+    font-size: 80px;
+    color: white;
+}
+
+.winner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.winner p {
+    color: white;
+    font-size: 75px;
+}
+
+
+
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 2;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+.overlay button {
+    padding: 6px 12px;
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+
+.text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+}
