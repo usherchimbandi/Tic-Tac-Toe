@@ -1,17 +1,22 @@
-const submit = document.querySelector('.submit-details');
-const restart = document.querySelector('.restart');
-let SUBMIT_BUTTON_PRESSED = false;
+const btn_check = (function(){
+    return {
+        SUBMIT_BUTTON_PRESSED: false,
+        HAS_RESTARTED: false
+    }
+})();
 
-// -------------------------------------WHAT HAPPENS AFTER THE SUBMIT BUTTON IS CLICKED----------------------------------------------------------------------------------------
+// -------------------------------------click event for the submit button----------------------------------------------------------------------------------------
 
-submit.addEventListener('click', submitted);
+document.querySelector('.submit-details').addEventListener('click', submitted);
 
 
 // -----------------------------------------------------FUNCTION FOR WHAT HAPPENS AFTER SUBMIT BUTTON IS CLICKED----------------------------------------------
 function submitted() {
+    const submit = document.querySelector('.submit-details');
+    const restart = document.querySelector('.restart');
     submit.style.display = 'none';
     restart.style.display = 'block';
-    SUBMIT_BUTTON_PRESSED = true;
+    btn_check.SUBMIT_BUTTON_PRESSED = true;
 
     const input = document.querySelector('#player1-name');
     const input2 = document.querySelector('#player2-name');
@@ -25,6 +30,7 @@ function submitted() {
     turn.whos_turn = player1;
 
     restart.addEventListener('click', e => {
+        btn_check.HAS_RESTARTED = true;
         submit.style.display = 'block';
         restart.style.display = 'none';
         restart_game(player1, player2);
@@ -39,9 +45,9 @@ function submitted() {
     const blocks = document.querySelectorAll('.block');
     blocks.forEach((block) => {
         block.addEventListener('click', e => {
-            if(SUBMIT_BUTTON_PRESSED) {
+            if(btn_check.SUBMIT_BUTTON_PRESSED) {
                 /* For some reason, the player1.name and player2.name values change to the first original values when i play another game with different names, that's why I am 
-                changing them here. When they change, the turn.second_player object also changes. */
+                changing them here. */
                 player1.name = input.value;
                 player2.name = input2.value;
 
@@ -87,7 +93,7 @@ function submitted() {
 
 const gameboardModule = (function(){
     return {
-        gameboard: []
+        gameboard: []  // This array keeps a record of all the moves played by both players
     }
 })()
 
@@ -109,7 +115,7 @@ const players = function(player1, player2) {
     }
 }
 
-// ---------------RETURN AN OBJECT THAT DECIDES WHO'S TURN IT IS TO PLAY AND MAKES BOTH PLAYER OBJECTS ACCESSIBLE INSIDE THIS OBJECT-----------------------------
+// ---------------------------------------RETURN AN OBJECT THAT DECIDES WHO'S TURN IT IS TO PLAY-----------------------------------------------
 
 function turn_creation() {
     return {
@@ -208,13 +214,11 @@ function check(arr) {
     }
 }
 
-
-// -------------------------------------------FUNCTION TO CREATE BACKGROUND OVERLAY----------------------------------------------------------------------------------
-
-function winner(player) {
-    SUBMIT_BUTTON_PRESSED = false;
+function game_over() {
+    const submit = document.querySelector('.submit-details');
+    const restart = document.querySelector('.restart');
+    btn_check.SUBMIT_BUTTON_PRESSED = false;
     document.querySelector(".overlay").style.display = "block";
-    document.querySelector(".text").textContent = `${player} HAS WON!`
     let btn = document.querySelector(".bbtn")
     btn.addEventListener('click', e => {    
         submit.style.display = 'block';
@@ -223,9 +227,16 @@ function winner(player) {
 
         input_off();
 
-        reset_blocks_and_array();
+        restart_game();
 
     });
+}
+
+// -------------------------------------------FUNCTION TO CREATE BACKGROUND OVERLAY----------------------------------------------------------------------------------
+
+function winner(player) {
+    document.querySelector(".text").textContent = `${player} HAS WON!`
+    game_over();
 }
 
 // -------------------------------------------FUNCTION TO REMOVE BACKGROUND OVERLAY----------------------------------------------------------------------------------
@@ -239,63 +250,26 @@ function off() {
 
 
 function tie() {
-    SUBMIT_BUTTON_PRESSED = false;
-    document.querySelector(".overlay").style.display = "block";
     document.querySelector(".text").textContent = `IT'S A TIE`;
-    let btn = document.querySelector(".bbtn")
-    btn.addEventListener('click', e => { 
-        submit.style.display = 'block';
-        restart.style.display = 'none';
-        off();
-
-        input_off();
-
-        reset_blocks_and_array();
-
-    });
+    game_over();
 }
 
 // -------------------------------------------FUNCTION TO RESET ALL BLOCKS AND THE GAMEBOARD ARRAY----------------------------------------------------------------------------------
 
-
-function reset_blocks_and_array() {
-    const blocks = document.querySelectorAll('.block');
-        blocks.forEach((block) => {
-            block.textContent = '';
-            block.setAttribute('data-status', 'active');
-        });
-        document.querySelector('h2').textContent = '';
-        gameboardModule.gameboard = [];
-}
-
-
 function restart_game(p1, p2) {
-    SUBMIT_BUTTON_PRESSED = false;
-    input_off();
-    p1.arr = [];
-    p2.arr = [];
+    if(btn_check.HAS_RESTARTED) {
+        btn_check.SUBMIT_BUTTON_PRESSED = false;
+        input_off();
+        p1.arr = [];
+        p2.arr = [];
+    }
     const blocks = document.querySelectorAll('.block');
         blocks.forEach((block) => {
             block.textContent = '';
             block.setAttribute('data-status', 'active');
         });
-        document.querySelector('h2').textContent = '';
-        gameboardModule.gameboard = [];
+    document.querySelector('h2').textContent = '';
+    gameboardModule.gameboard = [];
+    btn_check.HAS_RESTARTED = false;
 }
 // -----------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-class Person{
-    constructor(name, age) {
-        this.name = name;
-        this.age = age
-    }
-    get details() {
-        return (`My name is ${this.name} and I am ${this.age}`)
-    }
-}
-
-
-let p1 = new Person('amo', 18);
